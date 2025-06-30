@@ -1,0 +1,25 @@
+def convert_currency(amount, from_currency, to_currency):
+    # Exchange rates are based on 1 unit of the 'from_currency' to 'to_currency'
+    exchange_rates = {
+        'USD': {'INR': 83.32, 'EUR': 0.92},
+        'INR': {'USD': 0.012, 'EUR': 0.011},
+        'EUR': {'USD': 1.09, 'INR': 90.15}
+    }
+
+    if from_currency not in exchange_rates or to_currency not in exchange_rates[from_currency]:
+        return "Conversion not supported."
+
+    rate = exchange_rates[from_currency][to_currency]
+    converted_amount = amount * rate
+    return round(converted_amount, 2)
+
+
+# Input
+print("Available currencies: USD, INR, EUR")
+from_curr = input("Enter FROM currency code: ").upper()
+to_curr = input("Enter TO currency code: ").upper()
+amount = float(input(f"Enter amount in {from_curr}: "))
+
+# Output
+result = convert_currency(amount, from_curr, to_curr)
+print(f"{amount} {from_curr} = {result} {to_curr}")
